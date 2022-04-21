@@ -1,0 +1,4 @@
+<!ELEMENT Baraja (Carta+)>
+<!ELEMENT Carta (Gana,Pierde)>
+<!ELEMENT Gana (#PCDATA)>
+<!ELEMENT Pierde (#PCDATA)>

@@ -1,0 +1,18 @@
+En la pantalla hay cuatro montones de cartas, el 
+juego se trata de unas cartas en las que puede tanto 
+ganar como perder dinero.
+
+En cada carta hay una indicación de lo que gana y 
+pierde.
+
+Parte de un total de 2.000 € como puede ver en el 
+marcador.
+
+Tiene que hacer clic sobre la carta que quiera elegir 
+hasta que se le indique que ya ha terminado el juego.
+
+En todo momento puede elegir la primera carta de 
+cualquier montón, hasta que se acaben las cartas de 
+la baraja y puede cambiar de baraja cuando quiera.
+
+Puede comenzar ...

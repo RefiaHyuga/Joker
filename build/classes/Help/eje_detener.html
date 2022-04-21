@@ -1,0 +1,59 @@
+<HTML>
+	<HEAD>
+		<TITLE> Detener Experimento </TITLE>
+	</HEAD>
+	<BODY>
+		<H1><FONT Color=Blue> Opci&oacute;n "Detener" </Font> </H1>
+		<p>
+			Pulsando esta opci&oacute;n, se fuerza a detener la ejecuci&oacute;n del experimento.
+		</p>
+		<p>
+			Cuando el experimento finaliza al pulsar esta opci&oacute;n, o por cualquier otra causa, el programa 
+			graba los resultados en un archivo de texto. La ubicaci&oacute;n de este archivo es la indicada en el 
+			par&aacute;metro correspondiente a "Ruta de ficheros".
+		</p>
+		<p>
+			El contenido de este fichero es en texto plano separado por tabuladores y con los siguientes campos:
+			<ul>
+				<li>Orden: N&uacute;mero de orden de la jugada.</li>	
+				<li>Mazo: Mazo que se ha seleccionado en esa jugada.</li>
+				<li>Gana: Importe de la ganancia de la carta seleccionada.</li>
+				<li>Pierde: Importe de la p&eacute;rdida de la carta seleccionada.</li>
+				<li>Pr&eacute;stamo: Importe del pr&eacute;stamo realizado al sujeto en su caso.</li>
+				<li>Saldo: Saldo acumulado por el sujeto hasta esa jugada.</li>
+				<li>Tiempo: Tiempo que lleva el sujeto empleado en el juego hasta esa jugada.</li>
+				<li>Parcial: Tiempo que ha tardado el sujeto en seleccionar la &uacute;ltima carta.</li>
+				<li>Saldo real: Saldo del sujeto descontando el saldo inicial y el resto de posibles pr&eacute;stamos.</li>
+				<li>nA, nB, nC, nD: N&uacute;mero de veces que el sujeto ha seleccionado cada mazo hasta el momento.</li>
+				<li>I.G.: &Iacute;ndice de Gambling con los datos disponibles hasta esa jugada.</li>
+				<li>npA, npB, npC, npD: N&uacute;mero de veces que el sujeto ha seleccionado cada mazo hasta el momento en el
+					correspondiente bloque parcial. Despu&eacute;s de cada n jugadas, estos contadores se ponen a cero. Siendo 
+					n el n&uacute;mero de jugadas que componen cada bloque parcial.</li>
+				<li>I.G.p.: &Iacute;ndice de Gambling parcial hasta esta jugada.</li>
+			</ul>
+		</p>
+		<p>
+			Una vez grabado el fichero, el programa muestra una ventana de edici&oacute;n que permite al usuario ver el
+			contenido de este, as&iacute; como seleccionar partes de el para copiarlas en otro programa, etc...
+		</p>
+		<p>
+			El nombre del archivo donde se almacenan los datos tiene un formato determinado que permite identificarlo y 
+			asociarlo al momento concreto en que fue creado: "ResultadoAAAAMMDDHHMMSS.txt", donde:
+			<ul>
+				<li>AAAA: A&ntilde;o</li>
+				<li>MM: Mes</li>
+				<li>DD: D&iacute;a</li>
+				<li>HH: Hora</li>
+				<li>MM: Minutos</li>
+				<li>SS: Segundos</li>
+			</ul>
+		</p>		
+		<p>
+			En cualquier caso, el archivo queda almacenado en el disco y a disposici&oacute;n del usuario para ser 
+			tratado por cualquier otro medio (hoja de c&aacute;lculo, base de datos, etc...).
+		</p>
+	</BODY>
+</HTML>
+
+
+

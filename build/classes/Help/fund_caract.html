@@ -1,0 +1,57 @@
+<HTML>
+	<HEAD>
+		<TITLE> Caracter&iacute;sticas </TITLE>
+	</HEAD>
+	<BODY>
+		<H1><FONT Color=Blue> Caracter&iacute;sticas del programa "Cartas" </Font> </H1>
+		<p>En el dise&ntilde;o del programa "Cartas" hemos tenido muy en cuenta los principios b&aacute;sicos del funcionamiento de la IGT, pero hemos dotado al programa de un nivel de flexibilidad muy superior, lo que le permite emular el funcionamiento de la IGT, y el dise&ntilde;o de tareas similares o incluso muy diferentes. </p>
+		<p>
+			La mayor&iacute;a de los par&aacute;metros del programa son modificables:
+			<ul>
+				<li>Los distintos mazos, podemos editarlos y adaptarlos a nuestras necesidades, podemos jugar con el programa de p&eacute;rdidas y ganancias y con el n&uacute;mero de cartas por mazo. Tambi&eacute;n Podemos alterar el "orden de presentaci&oacute;n" de los mazos, podemos utilizar una presentaci&oacute;n ABCD o DCAB, o cualquiera que se nos ocurra. Adem&aacute;s podemos trabajar con los mazos independientemente, es decir podemos dise&ntilde;ar tareas con s&oacute;lo parte de los mazos, con uno (A), dos (BC) , tres (ACD) o con los cuatro (DBCA). </li>
+				<li>El Saldo: podemos trabajar con un saldo inicial de 2000, pero tambi&eacute;n podemos combinar el programa de ganancias y p&eacute;rdidas y el saldo para adaptar al prueba a situaciones mas reales, en las que trabajemos con cantidades asociadas a los billetes de euro mas frecuentes (20, 10, 5). Adem&aacute;s atendiendo a las caracter&iacute;sticas de la prueba, el saldo puede ser visible, por lo que permite llevar el control de las ganancias o p&eacute;rdidas o no-visible, m&aacute;s fiel a la IGT.</li>
+				<li>N&uacute;mero de jugadas</li>
+				<li>La cuant&iacute;a de los pr&eacute;stamos cuando no haya saldo</li>
+				<li>Inversi&oacute;n del juego: invertir el programa de p&eacute;rdidas o ganancias. En este caso la formula para el c&aacute;lculo del &iacute;ndice gamblin tambi&eacute;n se invierte, siendo: (A+B)-(C+D)</li>
+				<li>Invertir el orden: normalmente se elige la primera carta del mazo, con la opci&oacute;n de invertir el orden podemos seleccionar la &uacute;ltima carta del mazo durante todo el juego, eso nos permite tener dos versiones distintas de la misma programaci&oacute;n de p&eacute;rdidas-ganancias.</li>
+				<li>Tiempo de presentaci&oacute;n de la jugada: es el tiempo que esta visible el resultado de la jugada (Ganancia y P&eacute;rdida), recordar que para la hip&oacute;tesis del marcado som&aacute;tico es importante el no poder llevar una cuenta precisa de los resultados. </li>
+				<li>Gambling parcial. En muchos trabajos, para tener una idea m&aacute;s precisa del funcionamiento de la prueba se divide esta en distintos bloques, lo m&aacute;s usual es dividir en bloques de 20, as&iacute; podemos tener en un mismo sujeto informaci&oacute;n de c&oacute;mo lleva a cabo la tarea en la jugada 20, 40, 60, 80 y 100. En nuestro caso podr&iacute;amos dividir la prueba en funci&oacute;n de nuestras necesidades, bloques de 10, de 25, etc.</li>
+				<li>Ruta de Ficheros: dentro de un mismo subdirectorio, podemos tener distintas programaciones, o bien podemos ubicarlas en subdirectorios diferentes.</li>
+			</ul>
+		</p>
+		<p>
+			Cuando se realiza la prueba, en la pantalla aparecer&aacute;n los cuatro mazos boca abajo y una vez iniciado el juego, en la parte inferior aparecer&aacute; (o no) el saldo inicial (normalmente 2000&euro;), el participante ha de realizar un n&uacute;mero de jugadas concreto, pero desconocido para &eacute;l (normalmente 100), y seg&uacute;n se van eligiendo cartas, autom&aacute;ticamente se suman o restan las ganancias y p&eacute;rdidas respectivamente, hasta completar en n&uacute;mero de jugadas. Tambi&eacute;n se registran en el archivo de resultados otros par&aacute;metros, los siguientes:
+			<ul>
+				<li>N&deg; de jugada</li>
+				<li>Mazo elegido en la jugada</li>
+				<li>Ganancia en la jugada</li>
+				<li>Perdida en la jugada</li>
+				<li>Si se ha recibido pr&eacute;stamo en caso de saldo negativo</li>
+				<li>Saldo acumulado</li>
+				<li>Tiempo transcurrido desde el inicio</li>
+				<li>Tiempo de la jugada</li>
+				<li>Saldo real (descontado saldo inicial y prestamos si lo hubiera)</li>
+				<li>N&deg; de elecciones de cada mazo:</li>
+				<ul>
+					<li>N&deg; de elecciones de mazo A</li>
+					<li>N&deg; de elecciones de mazo B</li>
+					<li>N&deg; de elecciones de mazo C</li>
+					<li>N&deg; de elecciones de mazo D</li>
+				</ul>
+				<li>El &iacute;ndice de gambling</li>
+				<li>N&deg; de elecciones por bloques de cada mazo:</li>
+				<ul>
+					<li>N&deg; de elecciones de mazo A</li>
+					<li>N&deg; de elecciones de mazo B</li>
+					<li>N&deg; de elecciones de mazo C</li>
+					<li>N&deg; de elecciones de mazo D</li>
+				</ul>
+				<li>El &iacute;ndice parcial de gambling por bloques
+			</ul>
+			El archivo de resultados se guarda en el subdirectorio indicado en la ruta de ficheros, y su nombre se desglosa de la siguiente forma, por ejemplo en el archivo: Resultado20100822121910.txt se descompone en el a&ntilde;o (cuatro primeros d&iacute;gitos: 2010), el mes (08), el d&iacute;a (22), la hora (12), los minutos (19) y los segundos (10)
+		</p>
+	</BODY>
+</HTML>
+
+
+
