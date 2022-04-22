@@ -6,11 +6,18 @@
 package Interfaces;
 
 import Funciones.Juego;
+import Funciones.StructParametros;
+
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.Timer;
 
@@ -23,16 +30,20 @@ public class jPartida extends javax.swing.JInternalFrame {
     /**
      * Creates new form jPartida
      */
-    public jPartida() {
+    private Juego juego;
+    private int estado, gana, pierde, dinero;
+
+    StructParametros p;
+    
+    public jPartida(StructParametros p) {
         initComponents();
         //inicializamos crono
+        this.p=p;
         t = new Timer(10, acciones);
-
         jcrono.setVisible(false);
-
+        jTFGanancias.setVisible(false);
         // Crear el objeto e inicializarlo.
         estado = 0;
-        segundos = 3;
         juego = new Juego();
         juego.cargarMazos();
 
@@ -159,25 +170,29 @@ public class jPartida extends javax.swing.JInternalFrame {
 
     private void jBtnMazoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoAActionPerformed
         JugarMazo('A');
-        jcrono.setVisible(true);
+        jcrono.setVisible(p.isVeretardo());
+        jTFGanancias.setVisible(p.isVersaldo());
         t.start();
     }//GEN-LAST:event_jBtnMazoAActionPerformed
 
     private void jBtnMazoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoBActionPerformed
         JugarMazo('B');
-        jcrono.setVisible(true);
+        jcrono.setVisible(p.isVeretardo());
+        jTFGanancias.setVisible(p.isVersaldo());
         t.start();
     }//GEN-LAST:event_jBtnMazoBActionPerformed
 
     private void jBtnMazoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoCActionPerformed
         JugarMazo('C');
-        jcrono.setVisible(true);
+        jcrono.setVisible(p.isVeretardo());
+        jTFGanancias.setVisible(p.isVersaldo());
         t.start();
     }//GEN-LAST:event_jBtnMazoCActionPerformed
 
     private void jBtnMazoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoDActionPerformed
         JugarMazo('D');
-        jcrono.setVisible(true);
+        jcrono.setVisible(p.isVeretardo());
+        jTFGanancias.setVisible(p.isVersaldo());
         t.start();
     }//GEN-LAST:event_jBtnMazoDActionPerformed
 
@@ -235,9 +250,11 @@ public class jPartida extends javax.swing.JInternalFrame {
             if (dinero < 0) {
                 jgana.setText("Has perdido " + dinero + " €");
                 jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/vacio.png")));
+                ReproducirSonido("./src/Sonido/pierde.wav");
             } else {
                 jgana.setText("Has ganado " + dinero + " €");
                 jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/dinero.png")));
+                ReproducirSonido("./src/Sonido/gana.wav");
             }
 
             jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
@@ -263,11 +280,8 @@ public class jPartida extends javax.swing.JInternalFrame {
                 break;
             case 2:
                 if (this.estado == 0) {
-
-                    String cLimite = "100";
-
                     // Actualizar ganancias
-                    juego.iniciarJuego(new Integer(cLimite), 2000);
+                    juego.iniciarJuego(p.getNumjugadas(), p.getSaldoini());
                     System.out.println(String.valueOf(juego.getSaldo()) + " €");
                     jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
                     jimg.setIcon(null);
@@ -316,7 +330,7 @@ public class jPartida extends javax.swing.JInternalFrame {
     };
 
     private void limiteTiempo() {
-        if (s == segundos) {
+        if (s == p.getRetardo()) {
             t.stop();
             CambiaEstado(2);
             s = cs = 0;
@@ -326,11 +340,22 @@ public class jPartida extends javax.swing.JInternalFrame {
 
     private void actualizarLabel() {
         //String tiempo = (h<=9?"0":"")+h+":"+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s+":"+(cs<=9?"0":"")+cs;
-        int seg =segundos - s -1;
+        int seg =p.getRetardo() - s -1;
         int cseg =100 - cs;
         String tiempo = (seg<=9?"0":"")+seg+":"+(cseg<=9?"0":"")+cseg;
         jcrono.setText(tiempo);
     }
+    
+    public void ReproducirSonido(String nombreSonido){
+       try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+       } catch(Exception ex) {
+         System.out.println(ex);
+       }
+     }
 
     Juego getJuego() {
         return juego;
@@ -347,7 +372,5 @@ public class jPartida extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jgana;
     private javax.swing.JLabel jimg;
     // End of variables declaration//GEN-END:variables
-    private Juego juego;
-    private int estado, gana, pierde, dinero, segundos;
 
 }

@@ -7,6 +7,7 @@ package Interfaces;
 
 import Funciones.EditarFicheros;
 import Funciones.Juego;
+import Funciones.StructParametros;
 import java.awt.Frame;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -24,13 +25,19 @@ public class MainMesa extends javax.swing.JFrame {
      * Creates new form MainMesa
      */
     private EditarFicheros edit;
-    jPartida parti;
-     public Juego juego;
+    jPartida parti; //ventana juego
+    public Juego juego; 
+    jParametros para; //ventana parametros
+    StructParametros parametros; //Parametros
 
     public MainMesa() {
+        //parametros por defecto
+        parametros= new StructParametros("", 2000, true, 100, 200, false, false, "ABCD",3 ,true ,20);
         edit = new EditarFicheros();
-        parti = new jPartida();
+        parti = new jPartida(parametros);
+        para = new jParametros(parametros);
         initComponents();
+        
     }
 
     /**
@@ -198,7 +205,15 @@ public class MainMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jMContenidoActionPerformed
 
     private void jMParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMParametrosActionPerformed
-        // TODO add your handling code here:
+        Escritorio.add(para);
+        para.toFront();
+        try {
+            para.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        para.show();
+
     }//GEN-LAST:event_jMParametrosActionPerformed
 
     private void jMBarajaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaAActionPerformed
@@ -233,6 +248,7 @@ public class MainMesa extends javax.swing.JFrame {
     private void jMDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetenerActionPerformed
         jMDetener.setEnabled(false);
         jMEjecutar.setEnabled(true);
+        jMParametros.setEnabled(true);
         juego= parti.getJuego();
         juego.grabaResultado();
         parti.CambiaEstado(0);
@@ -244,6 +260,7 @@ public class MainMesa extends javax.swing.JFrame {
     private void jMEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEjecutarActionPerformed
         jMDetener.setEnabled(true);
         jMEjecutar.setEnabled(false);
+        jMParametros.setEnabled(false);
         Escritorio.add(parti);
         parti.toFront();
         try {
@@ -290,7 +307,9 @@ public class MainMesa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMesa().setVisible(true);
+                MainMesa main = new MainMesa();
+                main.setExtendedState(MAXIMIZED_BOTH);
+                main.setVisible(true);
             }
         });
     }
