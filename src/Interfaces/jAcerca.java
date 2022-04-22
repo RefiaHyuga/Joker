@@ -33,7 +33,7 @@ public class jAcerca extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sello_uhu.gif"))); // NOI18N
-        jLabel2.setText("<html>\n<h2>Version 0.02B</h2>\n<p>(C) 2017</p>\n<P>Angela Ortega Gabrro</P>\n<P>Jose Ramon Alameda Bailen</p>\n</html>");
+        jLabel2.setText("<html>\n<h2>Version 1.5</h2>\n<p>(C) 2017</p>\n<P>Angela Ortega Gabrro</P>\n<P>Jose Ramon Alameda Bailen</p>\n</html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
