@@ -135,10 +135,10 @@ public class Juego {
 		CargaXML mazo;
 		Estado = 1;
 		
-		mazo = new CargaXML (MazoA, "datos/BarajaA.xml", false);
-		mazo = new CargaXML (MazoB, "datos/BarajaB.xml", false);
-		mazo = new CargaXML (MazoC, "datos/BarajaC.xml", false);
-		mazo = new CargaXML (MazoD, "datos/BarajaD.xml", false);
+		mazo = new CargaXML (MazoA, "src/Datos/BarajaA.xml", false);
+		mazo = new CargaXML (MazoB, "src/Datos/BarajaB.xml", false);
+		mazo = new CargaXML (MazoC, "src/Datos/BarajaC.xml", false);
+		mazo = new CargaXML (MazoD, "src/Datos/BarajaD.xml", false);
 
 		return (0);
 	}

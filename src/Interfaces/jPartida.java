@@ -7,7 +7,11 @@ package Interfaces;
 
 import Funciones.IU;
 import Funciones.Juego;
-import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import Funciones.EditarFicheros;
+import java.awt.Frame;
+import static javax.swing.SwingConstants.CENTER;
 
 /**
  *
@@ -20,7 +24,15 @@ public class jPartida extends javax.swing.JInternalFrame {
      */
     public jPartida() {
         initComponents();
+        // Crear el objeto e inicializarlo.
+        estado = 0;
+        segundos = 3;
         juego = new Juego();
+        juego.cargarMazos();
+
+        jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
+        //jTFGanancias.repaint();
+        CambiaEstado(2);
     }
 
     /**
@@ -33,37 +45,103 @@ public class jPartida extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jBtnMazoA = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jBtnMazoB = new javax.swing.JButton();
+        jBtnMazoC = new javax.swing.JButton();
+        jBtnMazoD = new javax.swing.JButton();
+        jTFGanancias = new javax.swing.JLabel();
+        jLEstado = new javax.swing.JLabel();
+        jimg = new javax.swing.JLabel();
+        jgana = new javax.swing.JLabel();
+        jcrono = new javax.swing.JLabel();
 
         setTitle("Partida en marcha");
 
-        jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.JPG"))); // NOI18N
+        jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
         jBtnMazoA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnMazoAActionPerformed(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.JPG"))); // NOI18N
+        jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
+        jBtnMazoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnMazoBActionPerformed(evt);
+            }
+        });
+
+        jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
+        jBtnMazoC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnMazoCActionPerformed(evt);
+            }
+        });
+
+        jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
+        jBtnMazoD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnMazoDActionPerformed(evt);
+            }
+        });
+
+        jTFGanancias.setText("Marcador");
+
+        jLEstado.setText("Estado");
+
+        jcrono.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jBtnMazoA, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104)
-                .addComponent(jLabel1)
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBtnMazoA, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnMazoB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnMazoC, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnMazoD, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(jLEstado)
+                                .addGap(38, 38, 38)
+                                .addComponent(jcrono)
+                                .addGap(46, 46, 46)
+                                .addComponent(jTFGanancias))
+                            .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBtnMazoA, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnMazoC, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnMazoD, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcrono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFGanancias, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLEstado, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnMazoA, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnMazoB, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -72,6 +150,18 @@ public class jPartida extends javax.swing.JInternalFrame {
     private void jBtnMazoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoAActionPerformed
         JugarMazo('A');
     }//GEN-LAST:event_jBtnMazoAActionPerformed
+
+    private void jBtnMazoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoBActionPerformed
+        JugarMazo('B');
+    }//GEN-LAST:event_jBtnMazoBActionPerformed
+
+    private void jBtnMazoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoCActionPerformed
+        JugarMazo('C');
+    }//GEN-LAST:event_jBtnMazoCActionPerformed
+
+    private void jBtnMazoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoDActionPerformed
+        JugarMazo('D');
+    }//GEN-LAST:event_jBtnMazoDActionPerformed
 
     /**
      * Funcion que levanta la carta superior de uno de los mazos
@@ -91,29 +181,62 @@ public class jPartida extends javax.swing.JInternalFrame {
             switch (mazo) {
                 case 'A':
                 case 'a':
-                    jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.jpg")));
-                    jBtnMazoA.setText("<html><body>Gana:<br>" + String.valueOf(juego.getCarta(mazo).getGanancia()) + "€" + "<br><br>Pierde:<br>" + String.valueOf(juego.getCarta(mazo).getPerdida()) + "€</body></html>");
+                    jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoA.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoA.setHorizontalTextPosition(CENTER);
                     break;
                 case 'B':
                 case 'b':
-                    jLAnversoB.setText("<html><body>Gana:<br>" + String.valueOf(juego.getCarta(mazo).getGanancia()) + "€" + "<br><br>Pierde:<br>" + String.valueOf(juego.getCarta(mazo).getPerdida()) + "€</body></html>");
-                    lb.show(jPMazoB0, getJPAnversoB().getName());
+                    jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoB.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoB.setHorizontalTextPosition(CENTER);
                     break;
                 case 'C':
                 case 'c':
-                    jLAnversoC.setText("<html><body>Gana:<br>" + String.valueOf(juego.getCarta(mazo).getGanancia()) + "€" + "<br><br>Pierde:<br>" + String.valueOf(juego.getCarta(mazo).getPerdida()) + "€</body></html>");
-                    lc.show(jPMazoC0, getJPAnversoC().getName());
+                    jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoC.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoC.setHorizontalTextPosition(CENTER);
                     break;
                 case 'D':
                 case 'd':
-                    jLAnversoD.setText("<html><body>Gana:<br>" + String.valueOf(juego.getCarta(mazo).getGanancia()) + "€" + "<br><br>Pierde:<br>" + String.valueOf(juego.getCarta(mazo).getPerdida()) + "€</body></html>");
-                    ld.show(jPMazoD0, getJPAnversoD().getName());
+                    jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoD.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoD.setHorizontalTextPosition(CENTER);
                     break;
             }
+
+            dinero = gana - pierde;
+            if (dinero < 0) {
+                jgana.setText("Has perdido " + dinero + " €");
+                jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/vacio.png")));
+            } else {
+                jgana.setText("Has ganado " + dinero + " €");
+                jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/dinero.png")));
+            }
+            
+            /*//Ventana de ganacias
+            Frame f = JOptionPane.getFrameForComponent(this);
+            dinero = gana - pierde;
+            jGanancia dialog = new jGanancia(f, true, dinero, segundos);
+            dialog.setDefaultCloseOperation(0);
+            dialog.show();
+             */
+            
             // Actualizar ganancias
             jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
-            jTFGanancias.repaint();
-        } else {
+
+            //Activamolas cartas
+            CambiaEstado(2);
+        }
+        /*else {
             switch (mazo) {
                 case 'A':
                 case 'a':
@@ -132,14 +255,67 @@ public class jPartida extends javax.swing.JInternalFrame {
                     jPMazoD0.setVisible(false);
                     break;
             }
-        }
+        }*/
         //repaint();
         //new IU.HabilitarMazo ('A').start();
     }
 
+    private void CambiaEstado(int estado) {
+
+        switch (estado) {
+            case 0:
+                jLEstado.setForeground(Color.RED);
+                jBtnMazoA.setText("");
+                jBtnMazoB.setText("");
+                jBtnMazoC.setText("");
+                jBtnMazoD.setText("");
+                jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
+                //jTFGanancias.repaint();
+                this.estado = 0;
+                break;
+            case 1:
+                jLEstado.setForeground(Color.YELLOW);
+                this.estado = 1;
+                break;
+            case 2:
+                if (this.estado == 0) {
+
+                    String cLimite = "100";
+
+                    //cLimite = JOptionPane.showInputDialog("Indicar el limite de jugadas:", cLimite);
+                    if (cLimite == null) {
+                        cLimite = "100";
+                    }
+
+                    jBtnMazoA.setText("");
+                    jBtnMazoB.setText("");
+                    jBtnMazoC.setText("");
+                    jBtnMazoD.setText("");
+
+                    juego.iniciarJuego(new Integer(cLimite), 2000);
+                    System.out.println(String.valueOf(juego.getSaldo()) + " €");
+                    jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
+                    jTFGanancias.repaint();
+                }
+                jLEstado.setForeground(Color.GREEN);
+                this.estado = 2;
+                break;
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnMazoA;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jBtnMazoB;
+    private javax.swing.JButton jBtnMazoC;
+    private javax.swing.JButton jBtnMazoD;
+    private javax.swing.JLabel jLEstado;
+    private javax.swing.JLabel jTFGanancias;
+    private javax.swing.JLabel jcrono;
+    private javax.swing.JLabel jgana;
+    private javax.swing.JLabel jimg;
     // End of variables declaration//GEN-END:variables
     private Juego juego;
+    private int estado, gana, pierde, dinero, segundos;
+
 }

@@ -6,6 +6,10 @@
 package Interfaces;
 
 import Funciones.EditarFicheros;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -187,7 +191,7 @@ public class MainMesa extends javax.swing.JFrame {
     private void jMContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMContenidoActionPerformed
 		jFContenido jfc = new jFContenido();
                 jfc.setVisible(true); 
-                jfc.setSize(900,500);
+                jfc.setSize(900,800);
     }//GEN-LAST:event_jMContenidoActionPerformed
 
     private void jMParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMParametrosActionPerformed
@@ -234,6 +238,11 @@ public class MainMesa extends javax.swing.JFrame {
         jMEjecutar.setEnabled(false);
         Escritorio.add(parti);
         parti.toFront();
+        try {
+            parti.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
         parti.show();
     }//GEN-LAST:event_jMEjecutarActionPerformed
 

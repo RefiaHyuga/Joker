@@ -5,6 +5,10 @@
  */
 package Funciones;
 
+import java.io.FileReader;
+import java.io.Reader;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Angela Ortega Gabarro
