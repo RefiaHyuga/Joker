@@ -1,6 +1,6 @@
 # Joker
 
-##Parámetros
+## Parámetros
 
 Como herramienta utilizaremos el programa Joker, hemos tenido muy en cuenta los principios básicos del funcionamiento de la Iowa Gambling Task (Bechara et al., 1994) para medir el proceso de toma de decisiones en situaciones de incertidumbre, pero hemos dotado al programa de un nivel de flexibilidad muy superior, lo que le permite emular el funcionamiento de la IGT, y el diseño de tareas similares o incluso muy diferentes. La mayoría de los parámetros del programa son modificables:
 
@@ -28,7 +28,7 @@ Cuando se realiza la prueba, en la pantalla aparecerán los cuatro mazos boca ab
 -	N° de elecciones del mazo: A/B/C/D
 -	Índice de gambling (total y parciales) 
 
-##Experimento. Importancia del programa de ganancias/pérdidas 
+## Experimento. Importancia del programa de ganancias/pérdidas 
 
 El participante observa en la pantalla del ordenador cuatro mazos de cartas boca abajo y debe escoger libremente cartas con el ratón, previamente en las instrucciones se le indica que el juego consiste en intentar conseguir el máximo dinero posible. Cada mazo contiene 40 cartas, y la tarea consta de un total de 100 ensayos (esto es desconocido por el participante).
 
