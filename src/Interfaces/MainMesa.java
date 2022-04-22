@@ -5,14 +5,13 @@
  */
 package Interfaces;
 
-import Funciones.EditarFicheros;
 import Funciones.Juego;
 import Funciones.StructParametros;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,19 +23,23 @@ public class MainMesa extends javax.swing.JFrame {
     /**
      * Creates new form MainMesa
      */
-    private EditarFicheros edit;
-    jPartida parti; //ventana juego
+    
+    jPartida partida; //ventana juego
     public Juego juego; 
-    jParametros para; //ventana parametros
+    jParametros param; //ventana parametros
     StructParametros parametros; //Parametros
+    jConfig config;
+    int numPartidas;
 
     public MainMesa() {
         //parametros por defecto
-        parametros= new StructParametros("", 2000, true, 100, 200, false, false, "ABCD",3 ,true ,20);
-        edit = new EditarFicheros();
-        parti = new jPartida(parametros);
-        para = new jParametros(parametros);
+        parametros= new StructParametros("src/Datos", 2000, true, 100, 200, false, false, "ABCD",3 ,true ,20,true,"Resultado", true,"../Imagenes/","reverso2.png","dinero.png","vacio.png");
+        //partida = new jPartida(parametros);
+        param = new jParametros(parametros);
+        config = new jConfig(parametros);
+        numPartidas=0;
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Imagenes/joker.png")));
         
     }
 
@@ -51,18 +54,12 @@ public class MainMesa extends javax.swing.JFrame {
 
         Escritorio = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        jMExprerimento = new javax.swing.JMenu();
-        jMParametros = new javax.swing.JMenuItem();
-        jMBaraja = new javax.swing.JMenu();
-        jMBarajaA = new javax.swing.JMenuItem();
-        jMBarajaB = new javax.swing.JMenuItem();
-        jMBarajaC = new javax.swing.JMenuItem();
-        jMBarajaD = new javax.swing.JMenuItem();
-        jMRepartir = new javax.swing.JMenuItem();
-        jMIntrucciones = new javax.swing.JMenuItem();
         jMEjecucion = new javax.swing.JMenu();
         jMEjecutar = new javax.swing.JMenuItem();
         jMDetener = new javax.swing.JMenuItem();
+        jMExprerimento = new javax.swing.JMenu();
+        jMAjustes = new javax.swing.JMenuItem();
+        jMParametros = new javax.swing.JMenuItem();
         jMAyuda = new javax.swing.JMenu();
         jMContenido = new javax.swing.JMenuItem();
         jMAcercade = new javax.swing.JMenuItem();
@@ -70,73 +67,11 @@ public class MainMesa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Joker");
 
-        jMExprerimento.setText("Experimento");
-
-        jMParametros.setText("Parametros");
-        jMParametros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMParametrosActionPerformed(evt);
-            }
-        });
-        jMExprerimento.add(jMParametros);
-
-        jMBaraja.setText("Editar Baraja");
-
-        jMBarajaA.setText("Baraja A");
-        jMBarajaA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBarajaAActionPerformed(evt);
-            }
-        });
-        jMBaraja.add(jMBarajaA);
-
-        jMBarajaB.setText("Baraja B");
-        jMBarajaB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBarajaBActionPerformed(evt);
-            }
-        });
-        jMBaraja.add(jMBarajaB);
-
-        jMBarajaC.setText("Baraja C");
-        jMBarajaC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBarajaCActionPerformed(evt);
-            }
-        });
-        jMBaraja.add(jMBarajaC);
-
-        jMBarajaD.setText("Baraja D");
-        jMBarajaD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBarajaDActionPerformed(evt);
-            }
-        });
-        jMBaraja.add(jMBarajaD);
-
-        jMRepartir.setText("Repartir");
-        jMRepartir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMRepartirActionPerformed(evt);
-            }
-        });
-        jMBaraja.add(jMRepartir);
-
-        jMExprerimento.add(jMBaraja);
-
-        jMIntrucciones.setText("Editar Instrucciones");
-        jMIntrucciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIntruccionesActionPerformed(evt);
-            }
-        });
-        jMExprerimento.add(jMIntrucciones);
-
-        menuBar.add(jMExprerimento);
-
-        jMEjecucion.setText("Ejecución");
+        jMEjecucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/partida.png"))); // NOI18N
+        jMEjecucion.setText("Partida");
 
         jMEjecutar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jMEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/play.png"))); // NOI18N
         jMEjecutar.setText("Ejecutar");
         jMEjecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +81,7 @@ public class MainMesa extends javax.swing.JFrame {
         jMEjecucion.add(jMEjecutar);
 
         jMDetener.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        jMDetener.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/stop.png"))); // NOI18N
         jMDetener.setText("Detener");
         jMDetener.setEnabled(false);
         jMDetener.addActionListener(new java.awt.event.ActionListener() {
@@ -157,10 +93,35 @@ public class MainMesa extends javax.swing.JFrame {
 
         menuBar.add(jMEjecucion);
 
+        jMExprerimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/config.png"))); // NOI18N
+        jMExprerimento.setText("Configuración");
+
+        jMAjustes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/option.png"))); // NOI18N
+        jMAjustes.setText("Ajustes de programa");
+        jMAjustes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMAjustesActionPerformed(evt);
+            }
+        });
+        jMExprerimento.add(jMAjustes);
+
+        jMParametros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mazo.png"))); // NOI18N
+        jMParametros.setText("Parametros de la partida");
+        jMParametros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMParametrosActionPerformed(evt);
+            }
+        });
+        jMExprerimento.add(jMParametros);
+
+        menuBar.add(jMExprerimento);
+
+        jMAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/about.png"))); // NOI18N
         jMAyuda.setMnemonic('h');
         jMAyuda.setText("Ayuda");
 
         jMContenido.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMContenido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ayuda.png"))); // NOI18N
         jMContenido.setMnemonic('c');
         jMContenido.setText("Contenidos");
         jMContenido.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +132,7 @@ public class MainMesa extends javax.swing.JFrame {
         jMAyuda.add(jMContenido);
 
         jMAcercade.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMAcercade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/write.png"))); // NOI18N
         jMAcercade.setMnemonic('a');
         jMAcercade.setText("Acerca de");
         jMAcercade.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +154,7 @@ public class MainMesa extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
         );
 
         pack();
@@ -205,40 +167,16 @@ public class MainMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jMContenidoActionPerformed
 
     private void jMParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMParametrosActionPerformed
-        Escritorio.add(para);
-        para.toFront();
+        Escritorio.add(param);
+        param.toFront();
         try {
-            para.setMaximum(true);
+            param.setMaximum(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainMesa.class.getName()).log(Level.SEVERE, null, ex);
         }
-        para.show();
+        param.show();
 
     }//GEN-LAST:event_jMParametrosActionPerformed
-
-    private void jMBarajaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaAActionPerformed
-        edit.EditarFicheroXML("src/Datos/BarajaA.xml");
-    }//GEN-LAST:event_jMBarajaAActionPerformed
-
-    private void jMBarajaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaBActionPerformed
-        edit.EditarFicheroXML("src/Datos/BarajaB.xml");
-    }//GEN-LAST:event_jMBarajaBActionPerformed
-
-    private void jMBarajaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaCActionPerformed
-        edit.EditarFicheroXML("src/Datos/BarajaC.xml");
-    }//GEN-LAST:event_jMBarajaCActionPerformed
-
-    private void jMBarajaDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaDActionPerformed
-        edit.EditarFicheroXML("src/Datos/BarajaD.xml");
-    }//GEN-LAST:event_jMBarajaDActionPerformed
-
-    private void jMRepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRepartirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMRepartirActionPerformed
-
-    private void jMIntruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIntruccionesActionPerformed
-        edit.EditarFicheroTXT("src/Recursos/Instrucciones.txt");
-    }//GEN-LAST:event_jMIntruccionesActionPerformed
 
     private void jMAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAcercadeActionPerformed
         jAcerca acerca = new jAcerca(this, rootPaneCheckingEnabled);
@@ -249,11 +187,13 @@ public class MainMesa extends javax.swing.JFrame {
         jMDetener.setEnabled(false);
         jMEjecutar.setEnabled(true);
         jMParametros.setEnabled(true);
-        juego= parti.getJuego();
-        juego.grabaResultado();
-        parti.CambiaEstado(0);
-        parti.CambiaEstado(2);
-        parti.dispose();
+        jMAjustes.setEnabled(true);
+        juego= partida.getJuego();
+        juego.grabaResultado(parametros.getResultado(),numPartidas);
+        System.out.println(parametros.getResultado());
+        partida.CambiaEstado(0);
+        partida.CambiaEstado(2);
+        partida.dispose();
         
     }//GEN-LAST:event_jMDetenerActionPerformed
 
@@ -261,14 +201,17 @@ public class MainMesa extends javax.swing.JFrame {
         jMDetener.setEnabled(true);
         jMEjecutar.setEnabled(false);
         jMParametros.setEnabled(false);
-        Escritorio.add(parti);
-        parti.toFront();
+        jMAjustes.setEnabled(false);
+        numPartidas++;
+        partida = new jPartida(parametros);
+        Escritorio.add(partida);
+        partida.toFront();
         try {
-            parti.setMaximum(true);
+            partida.setMaximum(true);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(MainMesa.class.getName()).log(Level.SEVERE, null, ex);
         }
-        parti.show();
+        partida.show();
 
         //Ventana de instruciones
         Frame f = JOptionPane.getFrameForComponent(this);
@@ -276,6 +219,17 @@ public class MainMesa extends javax.swing.JFrame {
         dialog.show();
 
     }//GEN-LAST:event_jMEjecutarActionPerformed
+
+    private void jMAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAjustesActionPerformed
+        Escritorio.add(config);
+        config.toFront();
+        try {
+            config.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(MainMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        config.show();
+    }//GEN-LAST:event_jMAjustesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,20 +271,14 @@ public class MainMesa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JMenuItem jMAcercade;
+    private javax.swing.JMenuItem jMAjustes;
     private javax.swing.JMenu jMAyuda;
-    private javax.swing.JMenu jMBaraja;
-    private javax.swing.JMenuItem jMBarajaA;
-    private javax.swing.JMenuItem jMBarajaB;
-    private javax.swing.JMenuItem jMBarajaC;
-    private javax.swing.JMenuItem jMBarajaD;
     private javax.swing.JMenuItem jMContenido;
     private javax.swing.JMenuItem jMDetener;
     private javax.swing.JMenu jMEjecucion;
     private javax.swing.JMenuItem jMEjecutar;
     private javax.swing.JMenu jMExprerimento;
-    private javax.swing.JMenuItem jMIntrucciones;
     private javax.swing.JMenuItem jMParametros;
-    private javax.swing.JMenuItem jMRepartir;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

@@ -9,15 +9,18 @@ import Funciones.Juego;
 import Funciones.StructParametros;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.Timer;
 
@@ -31,24 +34,29 @@ public class jPartida extends javax.swing.JInternalFrame {
      * Creates new form jPartida
      */
     private Juego juego;
-    private int estado, gana, pierde, dinero;
+    private int estado, gana, pierde, dinero, estadoJuego;
 
     StructParametros p;
-    
+
     public jPartida(StructParametros p) {
         initComponents();
         //inicializamos crono
-        this.p=p;
+        this.p = p;
         t = new Timer(10, acciones);
         jcrono.setVisible(false);
         jTFGanancias.setVisible(false);
         // Crear el objeto e inicializarlo.
         estado = 0;
+        estadoJuego = 0;
         juego = new Juego();
-        juego.cargarMazos();
+        juego.cargarMazos(p.getRuta(), p.getColocar(), p.isInvorden());
 
         jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
+
+        Colocar();
+
         CambiaEstado(2);
+
     }
 
     /**
@@ -68,6 +76,7 @@ public class jPartida extends javax.swing.JInternalFrame {
         jimg = new javax.swing.JLabel();
         jgana = new javax.swing.JLabel();
         jcrono = new javax.swing.JLabel();
+        jAviso = new javax.swing.JLabel();
 
         setTitle("Partida en marcha");
 
@@ -113,6 +122,9 @@ public class jPartida extends javax.swing.JInternalFrame {
         jcrono.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jcrono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jAviso.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jAviso.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,9 +148,10 @@ public class jPartida extends javax.swing.JInternalFrame {
                                 .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcrono, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcrono, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                                    .addComponent(jTFGanancias, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                                    .addComponent(jAviso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,7 +175,9 @@ public class jPartida extends javax.swing.JInternalFrame {
                         .addComponent(jTFGanancias)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jcrono, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jAviso)
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -170,30 +185,42 @@ public class jPartida extends javax.swing.JInternalFrame {
 
     private void jBtnMazoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoAActionPerformed
         JugarMazo('A');
-        jcrono.setVisible(p.isVeretardo());
         jTFGanancias.setVisible(p.isVersaldo());
-        t.start();
+        jgana.setVisible(p.isSaldoganado());
+        if (estadoJuego == 0) {
+            jcrono.setVisible(p.isVeretardo());
+            t.start();
+        }
     }//GEN-LAST:event_jBtnMazoAActionPerformed
 
     private void jBtnMazoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoBActionPerformed
         JugarMazo('B');
-        jcrono.setVisible(p.isVeretardo());
         jTFGanancias.setVisible(p.isVersaldo());
-        t.start();
+        if (estadoJuego == 0) {
+            jcrono.setVisible(p.isVeretardo());
+            jgana.setVisible(p.isSaldoganado());
+            t.start();
+        }
     }//GEN-LAST:event_jBtnMazoBActionPerformed
 
     private void jBtnMazoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoCActionPerformed
         JugarMazo('C');
-        jcrono.setVisible(p.isVeretardo());
         jTFGanancias.setVisible(p.isVersaldo());
-        t.start();
+        if (estadoJuego == 0) {
+            jcrono.setVisible(p.isVeretardo());
+            jgana.setVisible(p.isSaldoganado());
+            t.start();
+        }
     }//GEN-LAST:event_jBtnMazoCActionPerformed
 
     private void jBtnMazoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoDActionPerformed
         JugarMazo('D');
-        jcrono.setVisible(p.isVeretardo());
         jTFGanancias.setVisible(p.isVersaldo());
-        t.start();
+        if (estadoJuego == 0) {
+            jcrono.setVisible(p.isVeretardo());
+            jgana.setVisible(p.isSaldoganado());
+            t.start();
+        }
     }//GEN-LAST:event_jBtnMazoDActionPerformed
 
     /**
@@ -208,56 +235,73 @@ public class jPartida extends javax.swing.JInternalFrame {
             return;
         }
         CambiaEstado(1);
-
-        if (juego.jugarMazo(mazo) == 0) {
-            // Mostrar resultado de la carta
-            switch (mazo) {
-                case 'A':
-                case 'a':
-                    jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
-                    gana = juego.getCarta(mazo).getGanancia();
-                    pierde = juego.getCarta(mazo).getPerdida();
-                    jBtnMazoA.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                    jBtnMazoA.setHorizontalTextPosition(CENTER);
-                    break;
-                case 'B':
-                case 'b':
-                    jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
-                    gana = juego.getCarta(mazo).getGanancia();
-                    pierde = juego.getCarta(mazo).getPerdida();
-                    jBtnMazoB.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                    jBtnMazoB.setHorizontalTextPosition(CENTER);
-                    break;
-                case 'C':
-                case 'c':
-                    jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
-                    gana = juego.getCarta(mazo).getGanancia();
-                    pierde = juego.getCarta(mazo).getPerdida();
-                    jBtnMazoC.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                    jBtnMazoC.setHorizontalTextPosition(CENTER);
-                    break;
-                case 'D':
-                case 'd':
-                    jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/anverso2.png")));
-                    gana = juego.getCarta(mazo).getGanancia();
-                    pierde = juego.getCarta(mazo).getPerdida();
-                    jBtnMazoD.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                    jBtnMazoD.setHorizontalTextPosition(CENTER);
-                    break;
+        estadoJuego = juego.jugarMazo(mazo);
+        if (estadoJuego == 0) {
+                
+                // Mostrar resultado de la carta
+                switch (mazo) {
+                    case 'A':
+                    case 'a':
+                        jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
+                        gana = juego.getCarta(mazo).getGanancia();
+                        pierde = juego.getCarta(mazo).getPerdida();
+                        jBtnMazoA.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                        jBtnMazoA.setHorizontalTextPosition(CENTER);
+                        break;
+                    case 'B':
+                    case 'b':
+                        jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
+                        gana = juego.getCarta(mazo).getGanancia();
+                        pierde = juego.getCarta(mazo).getPerdida();
+                        jBtnMazoB.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                        jBtnMazoB.setHorizontalTextPosition(CENTER);
+                        break;
+                    case 'C':
+                    case 'c':
+                        jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
+                        gana = juego.getCarta(mazo).getGanancia();
+                        pierde = juego.getCarta(mazo).getPerdida();
+                        jBtnMazoC.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                        jBtnMazoC.setHorizontalTextPosition(CENTER);
+                        break;
+                    case 'D':
+                    case 'd':
+                        jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
+                        gana = juego.getCarta(mazo).getGanancia();
+                        pierde = juego.getCarta(mazo).getPerdida();
+                        jBtnMazoD.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                        jBtnMazoD.setHorizontalTextPosition(CENTER);
+                        break;
+                }
+                
+                dinero = gana - pierde;
+                if (dinero < 0) {
+                    jgana.setText("Has perdido " + dinero + " €");
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getPierde())));
+                    if (p.isSonido()) {
+                        ReproducirSonido("./src/Sonido/pierde.wav");
+                    }
+                } else {
+                    jgana.setText("Has ganado " + dinero + " €");
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getGana())));
+                    if (p.isSonido()) {
+                        ReproducirSonido("./src/Sonido/gana.wav");
+                    }
+                }
+                
+                if(juego.getSaldo()<0){
+                    jAviso.setText("Tu saldo es negativo. Se te prestan "+ p.getPrestamo()+"€");
+                    juego.setSaldo(juego.getSaldo()+p.getPrestamo());
+                    jAviso.setForeground(Color.red);
+                }
+                
+                jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
+        } else {
+            if (estadoJuego == 3) {
+                Frame f = JOptionPane.getFrameForComponent(this);
+                jgameover dialog = new jgameover(f, true);
+                dialog.show();
             }
-
-            dinero = gana - pierde;
-            if (dinero < 0) {
-                jgana.setText("Has perdido " + dinero + " €");
-                jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/vacio.png")));
-                ReproducirSonido("./src/Sonido/pierde.wav");
-            } else {
-                jgana.setText("Has ganado " + dinero + " €");
-                jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/dinero.png")));
-                ReproducirSonido("./src/Sonido/gana.wav");
-            }
-
-            jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
         }
     }
 
@@ -286,18 +330,20 @@ public class jPartida extends javax.swing.JInternalFrame {
                     jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
                     jimg.setIcon(null);
                     jgana.setText("");
+                    jAviso.setText("");
                 }
 
-                jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
-                jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
-                jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
-                jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
+                jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
+                jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
+                jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
+                jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
 
                 jBtnMazoA.setText("");
                 jBtnMazoB.setText("");
                 jBtnMazoC.setText("");
                 jBtnMazoD.setText("");
-
+                jAviso.setText("");
+                
                 this.getContentPane().setBackground(Color.GREEN);
                 this.estado = 2;
                 break;
@@ -340,29 +386,39 @@ public class jPartida extends javax.swing.JInternalFrame {
 
     private void actualizarLabel() {
         //String tiempo = (h<=9?"0":"")+h+":"+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s+":"+(cs<=9?"0":"")+cs;
-        int seg =p.getRetardo() - s -1;
-        int cseg =100 - cs;
-        String tiempo = (seg<=9?"0":"")+seg+":"+(cseg<=9?"0":"")+cseg;
+        int seg = p.getRetardo() - s - 1;
+        int cseg = 100 - cs;
+        String tiempo = (seg <= 9 ? "0" : "") + seg + ":" + (cseg <= 9 ? "0" : "") + cseg;
         jcrono.setText(tiempo);
     }
-    
-    public void ReproducirSonido(String nombreSonido){
-       try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-       } catch(Exception ex) {
-         System.out.println(ex);
-       }
-     }
+
+    public void ReproducirSonido(String nombreSonido) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
 
     Juego getJuego() {
         return juego;
     }
 
+    void Colocar() {
+        int col = p.getColocar().length();
+        JButton arr[] = {jBtnMazoA, jBtnMazoB, jBtnMazoC, jBtnMazoD};
+
+        for (int i = 0; i < 4 - col; i++) {
+            arr[3 - i].setVisible(false);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jAviso;
     private javax.swing.JButton jBtnMazoA;
     private javax.swing.JButton jBtnMazoB;
     private javax.swing.JButton jBtnMazoC;

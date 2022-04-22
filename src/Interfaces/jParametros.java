@@ -17,14 +17,11 @@ public class jParametros extends javax.swing.JInternalFrame {
      * Creates new form Parametros
      */
     StructParametros p;
+    String memoria, nuevo;
 
-    public jParametros() {
-        initComponents();      
-    }
     public jParametros(StructParametros p) {
         initComponents();
-        this.p=p;
-        jruta.setText(p.getRuta());
+        this.p = p;
         jSaldoini.setValue(p.getSaldoini());
         jSaldo.setSelected(p.isVersaldo());
         jNjugada.setValue(p.getNumjugadas());
@@ -34,8 +31,12 @@ public class jParametros extends javax.swing.JInternalFrame {
         jColocacion.setText(p.getColocar());
         jretardo.setValue(p.getRetardo());
         jveretardo.setSelected(p.isVeretardo());
-        jgambling.setValue(p.getGambling());     
-        
+        jgambling.setValue(p.getGambling());
+        jsonido.setSelected(p.isSonido());
+        memoria = jColocacion.getText();
+        jcorrecto.setVisible(false);
+        jSaldoganado.setSelected(p.isSaldoganado());
+
     }
 
     /**
@@ -47,11 +48,6 @@ public class jParametros extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jruta = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -63,7 +59,6 @@ public class jParametros extends javax.swing.JInternalFrame {
         jveretardo = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
         jSaldoini = new javax.swing.JSpinner();
-        jCBIdioma = new javax.swing.JComboBox<>();
         jSaldo = new javax.swing.JCheckBox();
         jNjugada = new javax.swing.JSpinner();
         jprestamo = new javax.swing.JSpinner();
@@ -71,16 +66,11 @@ public class jParametros extends javax.swing.JInternalFrame {
         jgambling = new javax.swing.JSpinner();
         jAceptar = new javax.swing.JButton();
         jCancelar = new javax.swing.JButton();
+        jsonido = new javax.swing.JCheckBox();
+        jcorrecto = new javax.swing.JLabel();
+        jSaldoganado = new javax.swing.JCheckBox();
 
-        setTitle("Configuracion");
-
-        jLabel1.setText("Configuracion del programa");
-
-        jLabel2.setText("Idioma");
-
-        jLabel3.setText("Ruta de ficheros para cartas:");
-
-        jLabel4.setText("Parametros del experimento");
+        setTitle("Parametros de la partida");
 
         jLabel5.setText("Saldo inicial:");
 
@@ -95,6 +85,16 @@ public class jParametros extends javax.swing.JInternalFrame {
         jLabel9.setText("Colocación:");
 
         jColocacion.setText("ABCD");
+        jColocacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jColocacionFocusLost(evt);
+            }
+        });
+        jColocacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jColocacionActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Retardo para ocultar la carta:");
 
@@ -102,8 +102,6 @@ public class jParametros extends javax.swing.JInternalFrame {
         jveretardo.setText("Mostrar retardo");
 
         jLabel11.setText("Gambling parcial:");
-
-        jCBIdioma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jSaldo.setSelected(true);
         jSaldo.setText("Saldo visible");
@@ -122,6 +120,14 @@ public class jParametros extends javax.swing.JInternalFrame {
             }
         });
 
+        jsonido.setSelected(true);
+        jsonido.setText("Activar sonido");
+
+        jcorrecto.setText("Limite 4 mazos no repetidos.");
+
+        jSaldoganado.setSelected(true);
+        jSaldoganado.setText("Saldo ganado en la partida");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,43 +135,13 @@ public class jParametros extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jruta, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCBIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSaldoini, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
+                                .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jprestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jColocacion, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jretardo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jveretardo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jNjugada, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSaldo)
                             .addComponent(jInvjuego)
                             .addComponent(jInvorden)
@@ -173,44 +149,47 @@ public class jParametros extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jgambling, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jAceptar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCancelar))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jretardo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(33, 33, 33)
+                                .addComponent(jSaldoini, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jNjugada, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jprestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jColocacion, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcorrecto))
+                            .addComponent(jsonido)
+                            .addComponent(jSaldoganado)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jAceptar)
+                        .addGap(71, 71, 71)
+                        .addComponent(jCancelar)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jCBIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jSaldoini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSaldo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jNjugada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel7)
+                    .addComponent(jNjugada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jprestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,7 +200,8 @@ public class jParametros extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jColocacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jColocacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcorrecto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -233,60 +213,114 @@ public class jParametros extends javax.swing.JInternalFrame {
                     .addComponent(jLabel11)
                     .addComponent(jgambling, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCancelar)
-                    .addComponent(jAceptar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jsonido)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSaldoganado)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jAceptar)
+                    .addComponent(jCancelar))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAceptarActionPerformed
-        p.setRuta(jruta.getText());
-        p.setSaldoini((int) jSaldoini.getValue());
-        p.setVersaldo(jSaldo.isSelected());
-        p.setNumjugadas((int) jNjugada.getValue());
-        p.setPrestamo((int) jprestamo.getValue());
-        p.setInvjuego(jInvjuego.isSelected());
-        p.setInvorden(jInvorden.isSelected());
-        p.setColocar(jColocacion.getText());
-        p.setRetardo((int) jretardo.getValue());
-        p.setVeretardo(jveretardo.isSelected());
-        p.setGambling((int) jgambling.getValue());
-        dispose();
+        if (comprobarColocacion()) {
+            p.setSaldoini((int) jSaldoini.getValue());
+            p.setVersaldo(jSaldo.isSelected());
+            p.setNumjugadas((int) jNjugada.getValue());
+            p.setPrestamo((int) jprestamo.getValue());
+            p.setInvjuego(jInvjuego.isSelected());
+            p.setInvorden(jInvorden.isSelected());
+            p.setColocar(jColocacion.getText());
+            p.setRetardo((int) jretardo.getValue());
+            p.setVeretardo(jveretardo.isSelected());
+            p.setGambling((int) jgambling.getValue());
+            p.setSonido(jsonido.isSelected());
+            p.setSaldoganado(jSaldoganado.isSelected());
+            dispose();
+        }
     }//GEN-LAST:event_jAceptarActionPerformed
 
     private void jCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarActionPerformed
         dispose();
-        
+
     }//GEN-LAST:event_jCancelarActionPerformed
 
+    private void jColocacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jColocacionActionPerformed
+        comprobarColocacion();
+    }//GEN-LAST:event_jColocacionActionPerformed
+
+    private void jColocacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jColocacionFocusLost
+        comprobarColocacion();
+    }//GEN-LAST:event_jColocacionFocusLost
+
+    boolean comprobarColocacion() {
+        boolean nice;
+        nuevo = jColocacion.getText();
+        if (nuevo.length() <= 5) {
+            int correcto = 0;
+            for (int i = 0; i < nuevo.length(); i++) {
+                switch (nuevo.charAt(i)) {
+                    case 'A':
+                    case 'a':
+                        correcto++;
+                        break;
+                    case 'B':
+                    case 'b':
+                        correcto++;
+                        break;
+                    case 'C':
+                    case 'c':
+                        correcto++;
+                        break;
+                    case 'D':
+                    case 'd':
+                        correcto++;
+                        break;
+                }
+            }
+            if (nuevo.length() != correcto) {
+                jColocacion.setText(p.getColocar());
+                jcorrecto.setVisible(true);
+                nice = false;
+            } else {
+                jcorrecto.setVisible(false);
+                nice = true;
+            }
+        } else {
+            jColocacion.setText(p.getColocar());
+            jcorrecto.setVisible(true);
+            nice = false;
+        }
+
+        memoria = jColocacion.getText();
+        return nice;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAceptar;
-    private javax.swing.JComboBox<String> jCBIdioma;
     private javax.swing.JButton jCancelar;
     private javax.swing.JTextField jColocacion;
     private javax.swing.JCheckBox jInvjuego;
     private javax.swing.JCheckBox jInvorden;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSpinner jNjugada;
     private javax.swing.JCheckBox jSaldo;
+    private javax.swing.JCheckBox jSaldoganado;
     private javax.swing.JSpinner jSaldoini;
+    private javax.swing.JLabel jcorrecto;
     private javax.swing.JSpinner jgambling;
     private javax.swing.JSpinner jprestamo;
     private javax.swing.JSpinner jretardo;
-    private javax.swing.JTextField jruta;
+    private javax.swing.JCheckBox jsonido;
     private javax.swing.JCheckBox jveretardo;
     // End of variables declaration//GEN-END:variables
 }

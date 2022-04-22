@@ -23,8 +23,14 @@ public class StructParametros {
     int retardo;
     boolean veretardo;
     int gambling;
-    
-    public StructParametros(String ruta, int saldoini, boolean versaldo, int numjugadas, int prestamo, boolean invjuego, boolean invorden, String colocar, int retardo, boolean veretardo, int gambling) {
+    boolean sonido;
+    String resultado;
+    boolean saldoganado;
+    String rutaImagenes;
+    String imgCartas;
+    String pierde,gana;
+
+    public StructParametros(String ruta, int saldoini, boolean versaldo, int numjugadas, int prestamo, boolean invjuego, boolean invorden, String colocar, int retardo, boolean veretardo, int gambling, boolean sonido, String resultado, boolean saldoganado,String rutaImagenes, String imgCartas, String gana, String pierde) {
         this.ruta = ruta;
         this.saldoini = saldoini;
         this.versaldo = versaldo;
@@ -36,6 +42,13 @@ public class StructParametros {
         this.retardo = retardo;
         this.veretardo = veretardo;
         this.gambling = gambling;
+        this.sonido = sonido;
+        this.resultado = resultado;
+        this.saldoganado = saldoganado;
+        this.rutaImagenes = rutaImagenes;
+        this.imgCartas = imgCartas;
+        this.gana=gana;
+        this.pierde=pierde;
     }
     
     public String getRuta() {
@@ -126,6 +139,62 @@ public class StructParametros {
         this.gambling = gambling;
     }
 
+    public boolean isSonido() {
+        return sonido;
+    }
+
+    public void setSonido(boolean sonido) {
+        this.sonido = sonido;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public boolean isSaldoganado() {
+        return saldoganado;
+    }
+
+    public void setSaldoganado(boolean saldoganado) {
+        this.saldoganado = saldoganado;
+    }
+
+    public String getRutaImagenes() {
+        return rutaImagenes;
+    }
+
+    public void setRutaImagenes(String rutaCartas) {
+        this.rutaImagenes = rutaCartas;
+    }
+
+    public String getImgCartas() {
+        return imgCartas;
+    }
+
+    public void setImgCartas(String imgCartas) {
+        this.imgCartas = imgCartas;
+    }
+
+    public String getPierde() {
+        return pierde;
+    }
+
+    public void setPierde(String pierde) {
+        this.pierde = pierde;
+    }
+
+    public String getGana() {
+        return gana;
+    }
+
+    public void setGana(String gana) {
+        this.gana = gana;
+    }
+    
     
     
 }
