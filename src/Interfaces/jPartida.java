@@ -7,8 +7,10 @@ package Interfaces;
 
 import Funciones.Juego;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.Timer;
 
@@ -26,14 +28,15 @@ public class jPartida extends javax.swing.JInternalFrame {
         //inicializamos crono
         t = new Timer(10, acciones);
 
+        jcrono.setVisible(false);
+
         // Crear el objeto e inicializarlo.
         estado = 0;
         segundos = 3;
         juego = new Juego();
         juego.cargarMazos();
 
-        jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
-        //jTFGanancias.repaint();
+        jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
         CambiaEstado(2);
     }
 
@@ -51,13 +54,13 @@ public class jPartida extends javax.swing.JInternalFrame {
         jBtnMazoC = new javax.swing.JButton();
         jBtnMazoD = new javax.swing.JButton();
         jTFGanancias = new javax.swing.JLabel();
-        jLEstado = new javax.swing.JLabel();
         jimg = new javax.swing.JLabel();
         jgana = new javax.swing.JLabel();
         jcrono = new javax.swing.JLabel();
 
         setTitle("Partida en marcha");
 
+        jBtnMazoA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
         jBtnMazoA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +68,7 @@ public class jPartida extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtnMazoB.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
         jBtnMazoB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +76,7 @@ public class jPartida extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtnMazoC.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
         jBtnMazoC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +84,7 @@ public class jPartida extends javax.swing.JInternalFrame {
             }
         });
 
+        jBtnMazoD.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reverso2.png"))); // NOI18N
         jBtnMazoD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,11 +92,15 @@ public class jPartida extends javax.swing.JInternalFrame {
             }
         });
 
+        jTFGanancias.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jTFGanancias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jTFGanancias.setText("Marcador");
 
-        jLEstado.setText("Estado");
+        jgana.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jgana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jcrono.setText("jLabel1");
+        jcrono.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jcrono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,16 +119,16 @@ public class jPartida extends javax.swing.JInternalFrame {
                         .addComponent(jBtnMazoD, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLEstado)
-                                .addGap(45, 45, 45)
-                                .addComponent(jcrono, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFGanancias))
-                            .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                                .addGap(53, 53, 53)
+                                .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcrono, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,22 +137,21 @@ public class jPartida extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnMazoA, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnMazoB, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jBtnMazoC, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnMazoD, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcrono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFGanancias, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLEstado, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBtnMazoA, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBtnMazoB, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(jTFGanancias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcrono, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,21 +159,25 @@ public class jPartida extends javax.swing.JInternalFrame {
 
     private void jBtnMazoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoAActionPerformed
         JugarMazo('A');
+        jcrono.setVisible(true);
         t.start();
     }//GEN-LAST:event_jBtnMazoAActionPerformed
 
     private void jBtnMazoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoBActionPerformed
         JugarMazo('B');
+        jcrono.setVisible(true);
         t.start();
     }//GEN-LAST:event_jBtnMazoBActionPerformed
 
     private void jBtnMazoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoCActionPerformed
         JugarMazo('C');
+        jcrono.setVisible(true);
         t.start();
     }//GEN-LAST:event_jBtnMazoCActionPerformed
 
     private void jBtnMazoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoDActionPerformed
         JugarMazo('D');
+        jcrono.setVisible(true);
         t.start();
     }//GEN-LAST:event_jBtnMazoDActionPerformed
 
@@ -227,33 +240,24 @@ public class jPartida extends javax.swing.JInternalFrame {
                 jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/dinero.png")));
             }
 
-            /*//Ventana de ganacias
-            Frame f = JOptionPane.getFrameForComponent(this);
-            dinero = gana - pierde;
-            jGanancia dialog = new jGanancia(f, true, dinero, segundos);
-            dialog.setDefaultCloseOperation(0);
-            dialog.show();
-             */
-            // Actualizar ganancias
-            jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
+            jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
         }
     }
 
-    private void CambiaEstado(int estado) {
+    public void CambiaEstado(int estado) {
 
         switch (estado) {
             case 0:
-                jLEstado.setForeground(Color.RED);
+                this.getContentPane().setBackground(Color.RED);
                 jBtnMazoA.setText("");
                 jBtnMazoB.setText("");
                 jBtnMazoC.setText("");
                 jBtnMazoD.setText("");
-                jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
-                //jTFGanancias.repaint();
+                jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
                 this.estado = 0;
                 break;
             case 1:
-                jLEstado.setForeground(Color.YELLOW);
+                this.getContentPane().setBackground(Color.YELLOW);
                 this.estado = 1;
 
                 break;
@@ -262,17 +266,14 @@ public class jPartida extends javax.swing.JInternalFrame {
 
                     String cLimite = "100";
 
-                    //cLimite = JOptionPane.showInputDialog("Indicar el limite de jugadas:", cLimite);
-                    if (cLimite == null) {
-                        cLimite = "100";
-                    }
-
+                    // Actualizar ganancias
                     juego.iniciarJuego(new Integer(cLimite), 2000);
                     System.out.println(String.valueOf(juego.getSaldo()) + " €");
-                    jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
-                    jTFGanancias.repaint();
+                    jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
+                    jimg.setIcon(null);
+                    jgana.setText("");
                 }
-                
+
                 jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
                 jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
                 jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
@@ -282,7 +283,8 @@ public class jPartida extends javax.swing.JInternalFrame {
                 jBtnMazoB.setText("");
                 jBtnMazoC.setText("");
                 jBtnMazoD.setText("");
-                jLEstado.setForeground(Color.GREEN);
+
+                this.getContentPane().setBackground(Color.GREEN);
                 this.estado = 2;
                 break;
         }
@@ -318,13 +320,20 @@ public class jPartida extends javax.swing.JInternalFrame {
             t.stop();
             CambiaEstado(2);
             s = cs = 0;
+            jcrono.setVisible(false);
         }
     }
 
     private void actualizarLabel() {
         //String tiempo = (h<=9?"0":"")+h+":"+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s+":"+(cs<=9?"0":"")+cs;
-        String tiempo = s + ":" + (cs <= 9 ? "0" : "") + cs;
+        int seg =segundos - s -1;
+        int cseg =100 - cs;
+        String tiempo = (seg<=9?"0":"")+seg+":"+(cseg<=9?"0":"")+cseg;
         jcrono.setText(tiempo);
+    }
+
+    Juego getJuego() {
+        return juego;
     }
 
 
@@ -333,7 +342,6 @@ public class jPartida extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnMazoB;
     private javax.swing.JButton jBtnMazoC;
     private javax.swing.JButton jBtnMazoD;
-    private javax.swing.JLabel jLEstado;
     private javax.swing.JLabel jTFGanancias;
     private javax.swing.JLabel jcrono;
     private javax.swing.JLabel jgana;

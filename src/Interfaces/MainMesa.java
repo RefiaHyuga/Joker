@@ -6,10 +6,13 @@
 package Interfaces;
 
 import Funciones.EditarFicheros;
+import Funciones.Juego;
+import java.awt.Frame;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,10 +23,10 @@ public class MainMesa extends javax.swing.JFrame {
     /**
      * Creates new form MainMesa
      */
-   
     private EditarFicheros edit;
     jPartida parti;
-    
+     public Juego juego;
+
     public MainMesa() {
         edit = new EditarFicheros();
         parti = new jPartida();
@@ -189,9 +192,9 @@ public class MainMesa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMContenidoActionPerformed
-		jFContenido jfc = new jFContenido();
-                jfc.setVisible(true); 
-                jfc.setSize(900,800);
+        jFContenido jfc = new jFContenido();
+        jfc.setVisible(true);
+        jfc.setSize(900, 800);
     }//GEN-LAST:event_jMContenidoActionPerformed
 
     private void jMParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMParametrosActionPerformed
@@ -199,19 +202,19 @@ public class MainMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jMParametrosActionPerformed
 
     private void jMBarajaAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaAActionPerformed
-        edit.EditarFicheroXML ("src/Datos/BarajaA.xml");
+        edit.EditarFicheroXML("src/Datos/BarajaA.xml");
     }//GEN-LAST:event_jMBarajaAActionPerformed
 
     private void jMBarajaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaBActionPerformed
-        edit.EditarFicheroXML ("src/Datos/BarajaB.xml");
+        edit.EditarFicheroXML("src/Datos/BarajaB.xml");
     }//GEN-LAST:event_jMBarajaBActionPerformed
 
     private void jMBarajaCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaCActionPerformed
-        edit.EditarFicheroXML ("src/Datos/BarajaC.xml");
+        edit.EditarFicheroXML("src/Datos/BarajaC.xml");
     }//GEN-LAST:event_jMBarajaCActionPerformed
 
     private void jMBarajaDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBarajaDActionPerformed
-        edit.EditarFicheroXML ("src/Datos/BarajaD.xml");
+        edit.EditarFicheroXML("src/Datos/BarajaD.xml");
     }//GEN-LAST:event_jMBarajaDActionPerformed
 
     private void jMRepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRepartirActionPerformed
@@ -219,7 +222,7 @@ public class MainMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jMRepartirActionPerformed
 
     private void jMIntruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIntruccionesActionPerformed
-        edit.EditarFicheroTXT ("src/Recursos/Instrucciones.txt");
+        edit.EditarFicheroTXT("src/Recursos/Instrucciones.txt");
     }//GEN-LAST:event_jMIntruccionesActionPerformed
 
     private void jMAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAcercadeActionPerformed
@@ -230,7 +233,12 @@ public class MainMesa extends javax.swing.JFrame {
     private void jMDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetenerActionPerformed
         jMDetener.setEnabled(false);
         jMEjecutar.setEnabled(true);
+        juego= parti.getJuego();
+        juego.grabaResultado();
+        parti.CambiaEstado(0);
+        parti.CambiaEstado(2);
         parti.dispose();
+        
     }//GEN-LAST:event_jMDetenerActionPerformed
 
     private void jMEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEjecutarActionPerformed
@@ -244,6 +252,12 @@ public class MainMesa extends javax.swing.JFrame {
             Logger.getLogger(MainMesa.class.getName()).log(Level.SEVERE, null, ex);
         }
         parti.show();
+
+        //Ventana de instruciones
+        Frame f = JOptionPane.getFrameForComponent(this);
+        jInstruciones dialog = new jInstruciones(f, true);
+        dialog.show();
+
     }//GEN-LAST:event_jMEjecutarActionPerformed
 
     /**
