@@ -5,13 +5,12 @@
  */
 package Interfaces;
 
-import Funciones.IU;
 import Funciones.Juego;
 import java.awt.Color;
-import javax.swing.JOptionPane;
-import Funciones.EditarFicheros;
-import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import static javax.swing.SwingConstants.CENTER;
+import javax.swing.Timer;
 
 /**
  *
@@ -24,6 +23,9 @@ public class jPartida extends javax.swing.JInternalFrame {
      */
     public jPartida() {
         initComponents();
+        //inicializamos crono
+        t = new Timer(10, acciones);
+
         // Crear el objeto e inicializarlo.
         estado = 0;
         segundos = 3;
@@ -108,13 +110,12 @@ public class jPartida extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLEstado)
-                                .addGap(38, 38, 38)
-                                .addComponent(jcrono)
-                                .addGap(46, 46, 46)
+                                .addGap(45, 45, 45)
+                                .addComponent(jcrono, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFGanancias))
                             .addComponent(jgana, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -141,7 +142,7 @@ public class jPartida extends javax.swing.JInternalFrame {
                             .addComponent(jBtnMazoB, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jimg, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,18 +150,22 @@ public class jPartida extends javax.swing.JInternalFrame {
 
     private void jBtnMazoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoAActionPerformed
         JugarMazo('A');
+        t.start();
     }//GEN-LAST:event_jBtnMazoAActionPerformed
 
     private void jBtnMazoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoBActionPerformed
         JugarMazo('B');
+        t.start();
     }//GEN-LAST:event_jBtnMazoBActionPerformed
 
     private void jBtnMazoCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoCActionPerformed
         JugarMazo('C');
+        t.start();
     }//GEN-LAST:event_jBtnMazoCActionPerformed
 
     private void jBtnMazoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMazoDActionPerformed
         JugarMazo('D');
+        t.start();
     }//GEN-LAST:event_jBtnMazoDActionPerformed
 
     /**
@@ -221,7 +226,7 @@ public class jPartida extends javax.swing.JInternalFrame {
                 jgana.setText("Has ganado " + dinero + " €");
                 jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/dinero.png")));
             }
-            
+
             /*//Ventana de ganacias
             Frame f = JOptionPane.getFrameForComponent(this);
             dinero = gana - pierde;
@@ -229,35 +234,9 @@ public class jPartida extends javax.swing.JInternalFrame {
             dialog.setDefaultCloseOperation(0);
             dialog.show();
              */
-            
             // Actualizar ganancias
             jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
-
-            //Activamolas cartas
-            CambiaEstado(2);
         }
-        /*else {
-            switch (mazo) {
-                case 'A':
-                case 'a':
-                    jPMazoA0.setVisible(false);
-                    break;
-                case 'B':
-                case 'b':
-                    jPMazoB0.setVisible(false);
-                    break;
-                case 'C':
-                case 'c':
-                    jPMazoC0.setVisible(false);
-                    break;
-                case 'D':
-                case 'd':
-                    jPMazoD0.setVisible(false);
-                    break;
-            }
-        }*/
-        //repaint();
-        //new IU.HabilitarMazo ('A').start();
     }
 
     private void CambiaEstado(int estado) {
@@ -276,6 +255,7 @@ public class jPartida extends javax.swing.JInternalFrame {
             case 1:
                 jLEstado.setForeground(Color.YELLOW);
                 this.estado = 1;
+
                 break;
             case 2:
                 if (this.estado == 0) {
@@ -287,23 +267,67 @@ public class jPartida extends javax.swing.JInternalFrame {
                         cLimite = "100";
                     }
 
-                    jBtnMazoA.setText("");
-                    jBtnMazoB.setText("");
-                    jBtnMazoC.setText("");
-                    jBtnMazoD.setText("");
-
                     juego.iniciarJuego(new Integer(cLimite), 2000);
                     System.out.println(String.valueOf(juego.getSaldo()) + " €");
                     jTFGanancias.setText(String.valueOf(juego.getSaldo()) + " €");
                     jTFGanancias.repaint();
                 }
+                
+                jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
+                jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
+                jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
+                jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource("../Imagenes/reverso2.png")));
+
+                jBtnMazoA.setText("");
+                jBtnMazoB.setText("");
+                jBtnMazoC.setText("");
+                jBtnMazoD.setText("");
                 jLEstado.setForeground(Color.GREEN);
                 this.estado = 2;
                 break;
         }
     }
-    
-    
+    //Crono
+    private Timer t;
+    private int h, m, s, cs;
+    private ActionListener acciones = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            ++cs;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+            limiteTiempo();
+            actualizarLabel();
+        }
+
+    };
+
+    private void limiteTiempo() {
+        if (s == segundos) {
+            t.stop();
+            CambiaEstado(2);
+            s = cs = 0;
+        }
+    }
+
+    private void actualizarLabel() {
+        //String tiempo = (h<=9?"0":"")+h+":"+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s+":"+(cs<=9?"0":"")+cs;
+        String tiempo = s + ":" + (cs <= 9 ? "0" : "") + cs;
+        jcrono.setText(tiempo);
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnMazoA;
     private javax.swing.JButton jBtnMazoB;
