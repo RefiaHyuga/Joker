@@ -1,6 +1,6 @@
 # Joker
 
-##Trabajo de Fin de Master - Iowa Gambling Task 
+## Trabajo de Fin de Master - Iowa Gambling Task 
 
 Como herramienta utilizaremos el programa Joker, hemos tenido muy en cuenta los principios básicos del funcionamiento de la Iowa Gambling Task (Bechara et al., 1994) para medir el proceso de toma de decisiones en situaciones de incertidumbre, pero hemos dotado al programa de un nivel de flexibilidad muy superior, lo que le permite emular el funcionamiento de la IGT, y el diseño de tareas similares o incluso muy diferentes. La mayoría de los parámetros del programa son modificables:
 
