@@ -8,6 +8,7 @@ package Interfaces;
 import Funciones.EditarFicheros;
 import Funciones.StructParametros;
 import java.io.File;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,13 +31,18 @@ public class jConfig extends javax.swing.JInternalFrame {
         this.p = p;
         jruta.setText(p.getRuta());
         jrutaresultado.setText(p.getResultado());
-        this.fc = new JFileChooser();//Creamos el objeto JFileChooser
-        jLabel2.setVisible(false);
-        jCBIdioma.setVisible(false);
+        this.fc = new JFileChooser();//Creamos el objeto JFileChooser     
         jrutaCartas.setText(p.getImgCartas());
         jrutaincentivo.setText(p.getGana());
-        jrutaincentivo1.setText(p.getPierde());
-
+        jrutaincentivo1.setText(p.getPierde(0));
+        jrutaincentivo2.setText(p.getPierde(1));
+        jrutaincentivo3.setText(p.getPierde(2));
+        jrutaincentivo4.setText(p.getPierde(3));
+        jrutaincentivo5.setText(p.getPierde(4));
+        jrutaincentivo6.setText(p.getPierde(5));
+        jrutaincentivo7.setText(p.getEmpate());
+        jCBIdioma.addItem("Español");
+        jCBIdioma.addItem("Ingles");
     }
 
     /**
@@ -71,12 +77,29 @@ public class jConfig extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jrutaincentivo1 = new javax.swing.JTextField();
+        jrutaincentivo2 = new javax.swing.JTextField();
+        jrutaincentivo3 = new javax.swing.JTextField();
+        jrutaincentivo4 = new javax.swing.JTextField();
+        jrutaincentivo5 = new javax.swing.JTextField();
+        jrutaincentivo6 = new javax.swing.JTextField();
+        jrutaincentivo7 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setTitle("Ajustes del programa");
 
         jLabel2.setText("Idioma");
 
-        jCBIdioma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBIdioma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBIdiomaItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText("Ruta de ficheros para cartas:");
 
@@ -150,6 +173,20 @@ public class jConfig extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Cuando PIERDE");
 
+        jLabel10.setText("Cuando EMPATA");
+
+        jLabel11.setText("0-50");
+
+        jLabel12.setText("50-100");
+
+        jLabel13.setText("100-150");
+
+        jLabel14.setText("150-200");
+
+        jLabel15.setText("200-250");
+
+        jLabel16.setText("250-...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,7 +206,7 @@ public class jConfig extends javax.swing.JInternalFrame {
                                 .addComponent(jBExaminar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jruta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(294, Short.MAX_VALUE))
+                        .addContainerGap(327, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -178,6 +215,43 @@ public class jConfig extends javax.swing.JInternalFrame {
                                 .addComponent(jrutaCartas, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jrutaincentivo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jrutaincentivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel12))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jrutaincentivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel11))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jrutaincentivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel13))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jrutaincentivo6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel16))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jrutaincentivo4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel14))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jrutaincentivo5, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel15))))))
                             .addComponent(jBIntrucciones)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -202,17 +276,10 @@ public class jConfig extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jBMazoD))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jrutaincentivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jrutaincentivo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(166, 166, 166)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jrutaincentivo7, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -240,8 +307,33 @@ public class jConfig extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jrutaincentivo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(jrutaincentivo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrutaincentivo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrutaincentivo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrutaincentivo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrutaincentivo5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrutaincentivo6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jrutaincentivo7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jrutaresultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,7 +350,7 @@ public class jConfig extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jAceptar)
                     .addComponent(jCancelar))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,7 +381,13 @@ public class jConfig extends javax.swing.JInternalFrame {
         p.setResultado(jrutaresultado.getText());
         p.setImgCartas(jrutaCartas.getText());
         p.setGana(jrutaincentivo.getText());
-        p.setPierde(jrutaincentivo1.getText());      
+        p.setPierde(jrutaincentivo1.getText(),0);
+        p.setPierde(jrutaincentivo2.getText(),1);
+        p.setPierde(jrutaincentivo3.getText(),2);
+        p.setPierde(jrutaincentivo4.getText(),3);
+        p.setPierde(jrutaincentivo5.getText(),4);
+        p.setPierde(jrutaincentivo6.getText(),5);
+        p.setEmpate(jrutaincentivo7.getText());
         dispose();
     }//GEN-LAST:event_jAceptarActionPerformed
 
@@ -309,6 +407,10 @@ public class jConfig extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBExaminarActionPerformed
 
+    private void jCBIdiomaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBIdiomaItemStateChanged
+        String ciudad = (String) jCBIdioma.getSelectedItem();
+    }//GEN-LAST:event_jCBIdiomaItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAceptar;
@@ -321,6 +423,13 @@ public class jConfig extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jCBIdioma;
     private javax.swing.JButton jCancelar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -333,6 +442,12 @@ public class jConfig extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jrutaCartas;
     private javax.swing.JTextField jrutaincentivo;
     private javax.swing.JTextField jrutaincentivo1;
+    private javax.swing.JTextField jrutaincentivo2;
+    private javax.swing.JTextField jrutaincentivo3;
+    private javax.swing.JTextField jrutaincentivo4;
+    private javax.swing.JTextField jrutaincentivo5;
+    private javax.swing.JTextField jrutaincentivo6;
+    private javax.swing.JTextField jrutaincentivo7;
     private javax.swing.JTextField jrutaresultado;
     // End of variables declaration//GEN-END:variables
 }

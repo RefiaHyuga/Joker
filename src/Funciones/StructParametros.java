@@ -28,9 +28,10 @@ public class StructParametros {
     boolean saldoganado;
     String rutaImagenes;
     String imgCartas;
-    String pierde,gana;
+    String gana, empate;
+    String [] pierde;
 
-    public StructParametros(String ruta, int saldoini, boolean versaldo, int numjugadas, int prestamo, boolean invjuego, boolean invorden, String colocar, int retardo, boolean veretardo, int gambling, boolean sonido, String resultado, boolean saldoganado,String rutaImagenes, String imgCartas, String gana, String pierde) {
+    public StructParametros(String ruta, int saldoini, boolean versaldo, int numjugadas, int prestamo, boolean invjuego, boolean invorden, String colocar, int retardo, boolean veretardo, int gambling, boolean sonido, String resultado, boolean saldoganado,String rutaImagenes, String imgCartas, String gana, String[] pierde, String empate) {
         this.ruta = ruta;
         this.saldoini = saldoini;
         this.versaldo = versaldo;
@@ -49,6 +50,7 @@ public class StructParametros {
         this.imgCartas = imgCartas;
         this.gana=gana;
         this.pierde=pierde;
+        this.empate=empate;
     }
     
     public String getRuta() {
@@ -179,12 +181,12 @@ public class StructParametros {
         this.imgCartas = imgCartas;
     }
 
-    public String getPierde() {
-        return pierde;
+    public String getPierde(int i) {
+        return pierde[i];
     }
 
-    public void setPierde(String pierde) {
-        this.pierde = pierde;
+    public void setPierde(String pierde, int i) {
+        this.pierde[i] = pierde;
     }
 
     public String getGana() {
@@ -194,7 +196,13 @@ public class StructParametros {
     public void setGana(String gana) {
         this.gana = gana;
     }
-    
-    
+
+    public String getEmpate() {
+        return empate;
+    }
+
+    public void setEmpate(String empate) {
+        this.empate = empate;
+    }    
     
 }

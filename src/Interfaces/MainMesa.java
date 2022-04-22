@@ -23,24 +23,23 @@ public class MainMesa extends javax.swing.JFrame {
     /**
      * Creates new form MainMesa
      */
-    
     jPartida partida; //ventana juego
-    public Juego juego; 
+    public Juego juego;
     jParametros param; //ventana parametros
     StructParametros parametros; //Parametros
     jConfig config;
     int numPartidas;
+    String[] rutaimagen = {"vacio.png", "vacio.png", "vacio.png", "vacio.png", "vacio.png", "vacio.png"};
 
     public MainMesa() {
         //parametros por defecto
-        parametros= new StructParametros("src/Datos", 2000, true, 100, 200, false, false, "ABCD",3 ,true ,20,true,"Resultado", true,"../Imagenes/","reverso2.png","dinero.png","vacio.png");
+        parametros = new StructParametros("src/Datos", 2000, true, 100, 200, false, false, "ABCD", 3, true, 20, true, "Resultado", true, "../Imagenes/", "reverso2.png", "dinero.png", rutaimagen, "empate.png");
         //partida = new jPartida(parametros);
         param = new jParametros(parametros);
         config = new jConfig(parametros);
-        numPartidas=0;
+        numPartidas = 0;
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Imagenes/joker.png")));
-        
     }
 
     /**
@@ -188,13 +187,13 @@ public class MainMesa extends javax.swing.JFrame {
         jMEjecutar.setEnabled(true);
         jMParametros.setEnabled(true);
         jMAjustes.setEnabled(true);
-        juego= partida.getJuego();
-        juego.grabaResultado(parametros.getResultado(),numPartidas);
+        juego = partida.getJuego();
+        juego.grabaResultado(parametros.getResultado(), numPartidas);
         System.out.println(parametros.getResultado());
         partida.CambiaEstado(0);
         partida.CambiaEstado(2);
         partida.dispose();
-        
+
     }//GEN-LAST:event_jMDetenerActionPerformed
 
     private void jMEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEjecutarActionPerformed

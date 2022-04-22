@@ -46,7 +46,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Imagenes/sello_uhu.gif"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;h2&gt;Version 0.02B&lt;/h2&gt;&#xa;&lt;p&gt;(C) 2017&lt;/p&gt;&#xa;&lt;P&gt;Angela Ortega Gabrro&lt;/P&gt;&#xa;&lt;P&gt;Jose Ramon Alameda Bailen&lt;/p&gt;&#xa;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;h2&gt;Version 1.5&lt;/h2&gt;&#xa;&lt;p&gt;(C) 2017&lt;/p&gt;&#xa;&lt;P&gt;Angela Ortega Gabrro&lt;/P&gt;&#xa;&lt;P&gt;Jose Ramon Alameda Bailen&lt;/p&gt;&#xa;&lt;/html&gt;"/>
       </Properties>
     </Component>
   </SubComponents>

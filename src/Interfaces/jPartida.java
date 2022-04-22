@@ -237,65 +237,96 @@ public class jPartida extends javax.swing.JInternalFrame {
         CambiaEstado(1);
         estadoJuego = juego.jugarMazo(mazo);
         if (estadoJuego == 0) {
-                
-                // Mostrar resultado de la carta
-                switch (mazo) {
-                    case 'A':
-                    case 'a':
-                        jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
-                        gana = juego.getCarta(mazo).getGanancia();
-                        pierde = juego.getCarta(mazo).getPerdida();
-                        jBtnMazoA.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                        jBtnMazoA.setHorizontalTextPosition(CENTER);
-                        break;
-                    case 'B':
-                    case 'b':
-                        jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
-                        gana = juego.getCarta(mazo).getGanancia();
-                        pierde = juego.getCarta(mazo).getPerdida();
-                        jBtnMazoB.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                        jBtnMazoB.setHorizontalTextPosition(CENTER);
-                        break;
-                    case 'C':
-                    case 'c':
-                        jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
-                        gana = juego.getCarta(mazo).getGanancia();
-                        pierde = juego.getCarta(mazo).getPerdida();
-                        jBtnMazoC.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                        jBtnMazoC.setHorizontalTextPosition(CENTER);
-                        break;
-                    case 'D':
-                    case 'd':
-                        jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+"anverso2.png")));
-                        gana = juego.getCarta(mazo).getGanancia();
-                        pierde = juego.getCarta(mazo).getPerdida();
-                        jBtnMazoD.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
-                        jBtnMazoD.setHorizontalTextPosition(CENTER);
-                        break;
+
+            // Mostrar resultado de la carta
+            switch (mazo) {
+                case 'A':
+                case 'a':
+                    jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + "anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoA.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoA.setHorizontalTextPosition(CENTER);
+                    break;
+                case 'B':
+                case 'b':
+                    jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + "anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoB.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoB.setHorizontalTextPosition(CENTER);
+                    break;
+                case 'C':
+                case 'c':
+                    jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + "anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoC.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoC.setHorizontalTextPosition(CENTER);
+                    break;
+                case 'D':
+                case 'd':
+                    jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + "anverso2.png")));
+                    gana = juego.getCarta(mazo).getGanancia();
+                    pierde = juego.getCarta(mazo).getPerdida();
+                    jBtnMazoD.setText("<html><body>Gana:<br>" + String.valueOf(gana) + "€" + "<br><br>Pierde:<br>" + String.valueOf(pierde) + "€</body></html>");
+                    jBtnMazoD.setHorizontalTextPosition(CENTER);
+                    break;
+            }
+
+            dinero = gana - pierde;
+
+            if (dinero < 0) {
+                jgana.setText("Has perdido " + dinero + " €");
+                if (p.isSonido()) {
+                    ReproducirSonido("./src/Sonido/pierde.wav");
                 }
-                
-                dinero = gana - pierde;
-                if (dinero < 0) {
-                    jgana.setText("Has perdido " + dinero + " €");
-                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getPierde())));
-                    if (p.isSonido()) {
-                        ReproducirSonido("./src/Sonido/pierde.wav");
-                    }
+                if (dinero <= -250) {
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getPierde(5))));
+                } else if (dinero <= -200) {
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getPierde(4))));
+                } else if (dinero <= -150) {
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getPierde(3))));
+                } else if (dinero <= -100) {
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getPierde(2))));
+                } else if (dinero <= -50) {
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getPierde(1))));
                 } else {
-                    jgana.setText("Has ganado " + dinero + " €");
-                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getGana())));
-                    if (p.isSonido()) {
-                        ReproducirSonido("./src/Sonido/gana.wav");
-                    }
+                    jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getPierde(0))));
                 }
-                
-                if(juego.getSaldo()<0){
-                    jAviso.setText("Tu saldo es negativo. Se te prestan "+ p.getPrestamo()+"€");
-                    juego.setSaldo(juego.getSaldo()+p.getPrestamo());
-                    jAviso.setForeground(Color.red);
+
+            } else if (dinero == 0) {
+
+            } else {
+                jgana.setText("Has ganado " + dinero + " €");
+                jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getGana())));
+                if (p.isSonido()) {
+                    ReproducirSonido("./src/Sonido/gana.wav");
                 }
-                
-                jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
+            }
+
+            /* El estado simple de pierde-gana
+             if (dinero < 0) {
+             jgana.setText("Has perdido " + dinero + " €");
+             jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getPierde())));
+             if (p.isSonido()) {
+             ReproducirSonido("./src/Sonido/pierde.wav");
+             }
+             } else {
+             jgana.setText("Has ganado " + dinero + " €");
+             jimg.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getGana())));
+             if (p.isSonido()) {
+             ReproducirSonido("./src/Sonido/gana.wav");
+             }
+             }
+             */
+            if (juego.getSaldo() < 0) {
+                jAviso.setText("Tu saldo es negativo. Se te prestan " + p.getPrestamo() + "€");
+                juego.setSaldo(juego.getSaldo() + p.getPrestamo());
+                jAviso.setForeground(Color.red);
+            }
+
+            jTFGanancias.setText("Bote: " + String.valueOf(juego.getSaldo()) + " €");
         } else {
             if (estadoJuego == 3) {
                 Frame f = JOptionPane.getFrameForComponent(this);
@@ -333,17 +364,17 @@ public class jPartida extends javax.swing.JInternalFrame {
                     jAviso.setText("");
                 }
 
-                jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
-                jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
-                jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
-                jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes()+p.getImgCartas())));
+                jBtnMazoA.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getImgCartas())));
+                jBtnMazoB.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getImgCartas())));
+                jBtnMazoC.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getImgCartas())));
+                jBtnMazoD.setIcon(new javax.swing.ImageIcon(getClass().getResource(p.getRutaImagenes() + p.getImgCartas())));
 
                 jBtnMazoA.setText("");
                 jBtnMazoB.setText("");
                 jBtnMazoC.setText("");
                 jBtnMazoD.setText("");
                 jAviso.setText("");
-                
+
                 this.getContentPane().setBackground(Color.GREEN);
                 this.estado = 2;
                 break;

@@ -1,0 +1,1 @@
+Orden	Mazo	Gana	Pierde	Saldo	Tiempo	Parcial
