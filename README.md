@@ -2,6 +2,8 @@
 
 ## Trabajo de Fin de Master - Iowa Gambling Task 
 
+### About Joker
+
 Como herramienta utilizaremos el programa Joker, hemos tenido muy en cuenta los principios básicos del funcionamiento de la Iowa Gambling Task (Bechara et al., 1994) para medir el proceso de toma de decisiones en situaciones de incertidumbre, pero hemos dotado al programa de un nivel de flexibilidad muy superior, lo que le permite emular el funcionamiento de la IGT, y el diseño de tareas similares o incluso muy diferentes. La mayoría de los parámetros del programa son modificables:
 
 - Los distintos mazos, podemos editarlos y adaptarlos a nuestras necesidades, podemos jugar con el programa de pérdidas y ganancias y con el número de cartas por mazo. También podemos alterar el "orden de presentación" de los mazos, podemos utilizar una presentación ABCD o DCAB, o cualquiera posible. Además, podemos trabajar con los mazos independientemente, es decir podemos diseñar tareas con sólo parte de los mazos, con uno (A), dos (BC), tres (ACD) o con los cuatro (DBCA).
@@ -28,7 +30,7 @@ Cuando se realiza la prueba, en la pantalla aparecerán los cuatro mazos boca ab
 -	N° de elecciones del mazo: A/B/C/D
 -	Índice de gambling (total y parciales) 
 
-## Experimento. Importancia del programa de ganancias/pérdidas 
+#### Experimento. Importancia del programa de ganancias/pérdidas 
 
 El participante observa en la pantalla del ordenador cuatro mazos de cartas boca abajo y debe escoger libremente cartas con el ratón, previamente en las instrucciones se le indica que el juego consiste en intentar conseguir el máximo dinero posible. Cada mazo contiene 40 cartas, y la tarea consta de un total de 100 ensayos (esto es desconocido por el participante).
 
@@ -53,3 +55,11 @@ Los parámetros iniciales de la prueba son:
 En un procesamiento, tanto implícito, como estratégico, el participante ha de ser capaz de delimitar la naturaleza favorable/desfavorable de los distintos mazos, especialmente B y D (pérdidas muy poco frecuentes), si los participantes tienen problemas para establecer la asociación con las consecuencias a largo plazo de la tarea, manipulando la magnitud de las recompensa/pérdidas de las elecciones inmediatas, mejoraremos la correcta identificación favorable/desfavorable de los distintos mazos, especialmente de B y D al incrementar el número de pérdidas (aunque no el total) en dada ciclo de 10 cartas. 
 
 Con los resultados obtenidos podremos establecer un programa de entrenamiento en toma de decisiones mediante tareas de juegos que no ayude a optimizar el proceso de toma de decisiones en situaciones de incertidumbre.
+
+### Building
+
+Windows: Clone the repository and import it in netbeans.
+
+### Extra
+
+Still, if you find a bug or think that you could improve it, don't be afraid of contacting me on twitter (@Refia_Hyuga) or leaving a issue here.
